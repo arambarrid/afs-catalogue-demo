@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { QuoteForm } from "@/components/QuoteForm";
 import {
   CATEGORY_LABELS,
   PRODUCTS,
@@ -70,13 +71,18 @@ export default async function ProductPage({
             </span>
           </div>
 
-          <button
-            type="button"
-            disabled={!product.inStock}
-            className="mt-2 inline-flex w-fit items-center justify-center rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:bg-slate-300"
+          <a
+            href="#request-quote"
+            aria-disabled={!product.inStock}
+            className={
+              "mt-2 inline-flex w-fit items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition " +
+              (product.inStock
+                ? "bg-slate-900 text-white hover:bg-slate-700"
+                : "bg-slate-300 text-white pointer-events-none")
+            }
           >
             {product.inStock ? "Request a quote" : "Notify me"}
-          </button>
+          </a>
         </div>
       </div>
 
@@ -95,6 +101,20 @@ export default async function ProductPage({
             </div>
           ))}
         </dl>
+      </section>
+
+      <section
+        id="request-quote"
+        className="mt-10 rounded-lg border border-slate-200 bg-white p-6 shadow-sm"
+      >
+        <h2 className="mb-4 text-lg font-semibold text-slate-900">
+          Request a quote
+        </h2>
+        <QuoteForm
+          productSlug={product.slug}
+          productName={product.name}
+          inStock={product.inStock}
+        />
       </section>
     </main>
   );
