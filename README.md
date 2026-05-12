@@ -2,7 +2,7 @@
 
 A small Next.js + TypeScript catalogue, built as part of my application for the **Junior AI Web Developer** role at Advanced Fleet Signs.
 
-> **Live demo:** *(to be added after Vercel deploy — see `DEPLOY.md`)*
+> **Live demo:** [afs-catalogue-demo.vercel.app](https://afs-catalogue-demo.vercel.app/)
 
 The job ad asked for a GitHub portfolio. My production-grade software work — six years on the platform behind South America's first outpatient closed-loop artificial pancreas trial — lives in private clinical repositories I can't open-source. So instead of pointing at sparse public repos, I built this demo from scratch to show:
 
