@@ -16,10 +16,12 @@ It's intentionally small. The job description said "doesn't need to be polished 
 
 - **`app/page.tsx`** — catalogue index. Server component, renders the catalogue browser with the mock product list.
 - **`app/products/[slug]/page.tsx`** — dynamic product detail page with `generateStaticParams` and `notFound()` fallback.
+- **`app/products/[slug]/actions.ts`** — server action backing the quote form. Zod-validated input, typed `QuoteFormState` discriminated union.
 - **`components/CatalogueBrowser.tsx`** — client island. Text search, category dropdown, in-stock-only toggle, all driven by a single typed `Filters` state.
+- **`components/QuoteForm.tsx`** — client island wrapping the quote server action via `useActionState` and `useFormStatus`.
 - **`components/ProductCard.tsx`** — server-rendered card component.
 - **`lib/products.ts`** — typed product data. `Product`, `ProductCategory` types, mock data for ten AFS-style products (LED light bars, beacons, signage, reflective tape, fleet decals).
-- **`lib/search.ts`** — pure typed filter function, no React dependencies, easy to unit-test.
+- **`lib/search.ts`** — pure typed filter function, no React dependencies.
 
 ## What's deliberately *not* in it
 
@@ -38,17 +40,28 @@ I'm a Computer Engineer with extensive Java and C experience (six years on the A
 
 ## Run it locally
 
+This project uses [pnpm](https://pnpm.io/).
+
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm dev
 # open http://localhost:3000
 ```
 
 Or build the production bundle:
 
 ```bash
-npm run build
-npm start
+pnpm build
+pnpm start
+```
+
+## Tests
+
+Unit and component tests with Vitest + React Testing Library + jsdom. Covers `lib/` filter/lookup helpers, the quote-form server action (schema boundaries, product lookup), and the two client islands.
+
+```bash
+pnpm test         # watch mode
+pnpm test:run     # single run
 ```
 
 ## About me
